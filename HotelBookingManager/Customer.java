@@ -7,6 +7,14 @@ public class Customer {
     private BookingRequest bookingRequest;
     private BookingDuration bookingDuration;
 
+    public void setBookingRequest(BookingRequest bookingRequest) {
+        this.bookingRequest = bookingRequest;
+    }
+
+    public void setBookingDuration(BookingDuration bookingDuration) {
+        this.bookingDuration = bookingDuration;
+    }
+
     public Customer(String name, int age, String gender, BookingRequest bookingRequest, BookingDuration bookingDuration) {
         this.name = name;
         this.age = age;

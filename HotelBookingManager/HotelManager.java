@@ -26,30 +26,32 @@ public class HotelManager {
 
         Scanner scanner = new Scanner(System.in);
         try{
-            while(true) {
-            System.out.println();
-            System.out.println("**** Another Request *****");
-            System.out.println("Enter Occupancy : Single Double Triple");
-            String occupancy = scanner.next();
-            System.out.println("Enter floor no. only if required else 0");
-            int floor = scanner.nextInt();
-            System.out.println("Is AC required");
-            boolean ac = scanner.nextBoolean();
-            bookingRequest = new BookingRequest(RoomOccupancy.valueOf(occupancy), floor, ac);
-            Room roomIfAvailable = checkInCustomer(bookingRequest, hotel.getNoOFRooms());
-            if (roomIfAvailable != null) {
-                Booking bookingDone = bookingPriceAndDetails(roomIfAvailable, customer);
-                System.out.println("***** Your Room Details *****");
-                System.out.println("Room Number: " + bookingDone.getRoom().getRoomId() + "\n" +
-                        "Floor no.:" + bookingDone.getRoom().getFloor() + "\n" +
-                        "" + bookingDone.getRoom().getOccupancy() + " occupancy" + "\n" +
-                        "Is Ac there? " + bookingDone.getRoom().isHasAc() + "\n" +
-                        "Cost: " + bookingDone.getTotalCost() + "/Day");
-            } else {
-                System.out.println("No such room available");
-            }
+            while(true)
+            {
+                System.out.println();
+                System.out.println("**** Another Request *****");
+                System.out.println("Enter Occupancy : Single Double Triple");
+                String occupancy = scanner.next();
+                System.out.println("Enter floor no. only if required else 0");
+                int floor = scanner.nextInt();
+                System.out.println("Is AC required");
+                boolean ac = scanner.nextBoolean();
+                bookingRequest = new BookingRequest(RoomOccupancy.valueOf(occupancy), floor, ac);
+                customer.setBookingRequest(bookingRequest);
+                Room roomIfAvailable = checkInCustomer(bookingRequest, hotel.getNoOFRooms());
+                if (roomIfAvailable != null) {
+                    Booking bookingDone = bookingPriceAndDetails(roomIfAvailable, customer);
+                    System.out.println("***** Your Room Details *****");
+                    System.out.println("Room Number: " + bookingDone.getRoom().getRoomId() + "\n" +
+                            "Floor no.:" + bookingDone.getRoom().getFloor() + "\n" +
+                            "" + bookingDone.getRoom().getOccupancy() + " occupancy" + "\n" +
+                            "Is Ac there? " + bookingDone.getRoom().isHasAc() + "\n" +
+                            "Cost: " + bookingDone.getTotalCost() + "/Day");
+                } else {
+                    System.out.println("No such room available");
+                }
 
-        }
+            }
         }catch (Exception e){
             System.out.println(e.getMessage());
         }
